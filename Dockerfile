@@ -37,8 +37,5 @@ RUN crontab /etc/cron.d/sbtools
 #Create a log file to be able to run tail
 RUN touch /var/log/cron.log
 
-# Run the command on container setup
-CMD cron && tail -f /var/log/cron.log
-
 # Running commands for the startup of a container.
-#CMD chmod 644 /etc/cron.d/sbtools && cron && tail -f /var/log/cron.log
+CMD chmod 0644 /etc/cron.d/sbtools && crontab /etc/cron.d/sbtools && tail -f /var/log/cron.log
