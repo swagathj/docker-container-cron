@@ -31,11 +31,10 @@ RUN echo "${SSH_PRIVATE_KEY}" > ~/.ssh/id_rsa
 RUN chmod 600 ~/.ssh/id_rsa
 RUN ssh-keyscan batfs-hub11-bgl >> ~/.ssh/known_hosts
 
-# Apply cron job
-RUN crontab /etc/cron.d/sbtools
-
 #Create a log file to be able to run tail
 RUN touch /var/log/cron.log
 
-# Running commands for the startup of a container.
-CMD chmod 0644 /etc/cron.d/sbtools && crontab /etc/cron.d/sbtools && tail -f /var/log/cron.log
+# Run the command on container setup and apply cron
+CMD chmod 644 /etc/cron.d/sbtools && cron && tail -f /var/log/cron.log
+RUN crontab /etc/cron.d/sbtools
+
