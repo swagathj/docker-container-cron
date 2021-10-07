@@ -1,0 +1,17 @@
+/var/log/rsync/hub/individual/exclude-apps/* {
+  daily
+  rotate 2
+  compress
+  missingok
+  delaycompress
+  copytruncate
+}
+
+/var/log/rsync/hub/individual/include-apps/* {
+ daily
+ rotate 4
+ compress
+ missingok
+ delaycompress
+ copytruncate
+}
