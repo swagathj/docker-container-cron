@@ -7,7 +7,7 @@ MAINTAINER sjonnala@mathworks.com
 # Updating the packages and installing cron and vim editor if you later want to edit your script from inside your container.
 RUN apt-get update \
 && apt-get install cron -y && apt-get install vim -y && apt-get install iputils-ping -y && apt-get install python3-pip -y \
-&& apt-get install rsync -y && apt-get install openssh-client -y
+&& apt-get install rsync -y && apt-get install openssh-client -y && apt-install logrotate -y
 
 # Install logger module
 RUN pip3 install logger
@@ -20,6 +20,9 @@ RUN mkdir -p /opt/sync/bin/
 
 # Copy the sbtools 10min script
 COPY ./hub-sync-no-pull-SHARE_SBTOOLS.py /opt/sync/bin/
+
+# Crontab file copied to cron.d directory.
+COPY ./sbtools /etc/cron.d/
 
 # Crontab file copied to cron.d directory.
 COPY ./sbtools /etc/cron.d/
